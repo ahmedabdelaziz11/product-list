@@ -6,6 +6,7 @@ use App\core\controller;
 use App\Helpers\Response;
 use App\Models\Product;
 use App\requests\DeleteProductRequest;
+use App\requests\StoreProductRequest;
 
 class ProductController extends controller
 {
@@ -24,6 +25,18 @@ class ProductController extends controller
         $productModel = new Product();
         $products = $productModel->getAll();
         echo json_encode($products);
+    }
+
+    public function store()
+    {
+        $request = new StoreProductRequest();
+        if (!$request->validate()) {
+            Response::jsonResponse([
+                'status' => false,
+                'message' => $request->errors()
+            ], 400);
+            return;
+        }
     }
 
     public function delete()

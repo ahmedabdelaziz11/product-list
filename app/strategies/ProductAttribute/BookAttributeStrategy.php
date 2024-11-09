@@ -9,7 +9,7 @@ class BookAttributeStrategy implements AttributeInterface
         return "Weight: {$attribute} KG";
     }
 
-    public function validate(string $attribute):bool
+    public function validate(array $attribute):bool
     {
         return true;
     }

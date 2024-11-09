@@ -22,4 +22,15 @@ class AttributeStrategyFactory
         $formatter = new $type;
         return $formatter->format($attribute);
     }
+
+    public static function validate($type,$attribute)
+    {
+        if(!array_key_exists($type,Self::TYPES)){
+            throw new \Exception("Invalid type to format");
+        }
+
+        $type = Self::TYPES[$type];
+        $formatter = new $type;
+        return $formatter->validate($attribute);
+    }
 }

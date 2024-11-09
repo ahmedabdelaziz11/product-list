@@ -16,5 +16,6 @@ $router->get('add-product/', 'ProductController@create');
 
 $router->get('products', 'ProductController@list');
 $router->post('products/delete', 'ProductController@delete');
+$router->post('products/store', 'ProductController@store');
 
 $router->dispatch();
