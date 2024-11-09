@@ -2,7 +2,6 @@
 
 namespace App\core;
 
-
 class controller{
 
     public function view($path,$parm = []){
