@@ -1,5 +1,4 @@
 <?php ob_start(); ?>
-
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom">
         <h1 class="d-flex align-items-center col-md-3 mb-2 mb-md-0">
@@ -12,63 +11,81 @@
     </header>
 
     <form id="product_form" method="post">
-        <div class="mb-3">
-            <label for="sku" class="form-label">SKU</label>
-            <input type="text" id="sku" name="sku" class="form-control" required>
+        <div class="row mb-3 align-items-center">
+            <label for="sku" class="col-sm-2 col-form-label">SKU</label>
+            <div class="col-sm-4">
+                <input type="text" id="sku" name="sku" class="form-control" placeholder="#SKU" required>
+            </div>
         </div>
 
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" id="name" name="name" class="form-control" required>
+        <div class="row mb-3 align-items-center">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-4">
+                <input type="text" id="name" name="name" class="form-control" placeholder="#Name" required>
+            </div>
         </div>
 
-        <div class="mb-3">
-            <label for="price" class="form-label">Price ($)</label>
-            <input type="number" step="0.01" id="price" name="price" class="form-control" required>
+        <div class="row mb-3 align-items-center">
+            <label for="price" class="col-sm-2 col-form-label">Price ($)</label>
+            <div class="col-sm-4">
+                <input type="number" step="0.01" id="price" name="price" class="form-control" placeholder="#Price" required>
+            </div>
         </div>
 
-        <div class="mb-3">
-            <label for="productType" class="form-label">Type Switcher</label>
-            <select id="productType" name="productType" class="form-select" required onchange="toggleAttributes()">
-                <option value="" disabled selected>Select product type</option>
-                <option value="DVD">DVD</option>
-                <option value="Furniture">Furniture</option>
-                <option value="Book">Book</option>
-            </select>
+        <div class="row mb-3 align-items-center">
+            <label for="productType" class="col-sm-2 col-form-label">Type Switcher</label>
+            <div class="col-sm-4">
+                <select id="productType" name="productType" class="form-select" required onchange="toggleAttributes()">
+                    <option value="" disabled selected>Type Switcher</option>
+                    <option value="DVD">DVD</option>
+                    <option value="Furniture">Furniture</option>
+                    <option value="Book">Book</option>
+                </select>
+            </div>
         </div>
 
         <!-- DVD Attributes -->
         <div id="DVD" class="product-attributes" style="display: none;">
-            <div class="mb-3">
-                <label for="size" class="form-label">Size (MB)</label>
-                <input type="number" id="size" name="size" class="form-control">
-                <small class="form-text text-muted">Please,provide size in MB.</small>
+            <div class="row mb-3 align-items-center">
+                <label for="size" class="col-sm-2 col-form-label">Size (MB)</label>
+                <div class="col-sm-4">
+                    <input type="number" id="size" name="size" class="form-control">
+                    <small class="form-text text-muted">Please, provide size in MB.</small>
+                </div>
             </div>
         </div>
 
         <!-- Furniture Attributes -->
         <div id="Furniture" class="product-attributes" style="display: none;">
-            <div class="mb-3">
-                <label for="height" class="form-label">Height (CM)</label>
-                <input type="number" id="height" name="height" class="form-control">
+            <div class="row mb-3 align-items-center">
+                <label for="height" class="col-sm-2 col-form-label">Height (CM)</label>
+                <div class="col-sm-4">
+                    <input type="number" id="height" name="height" class="form-control">
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="width" class="form-label">Width (CM)</label>
-                <input type="number" id="width" name="width" class="form-control">
+            <div class="row mb-3 align-items-center">
+                <label for="width" class="col-sm-2 col-form-label">Width (CM)</label>
+                <div class="col-sm-4">
+                    <input type="number" id="width" name="width" class="form-control">
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="length" class="form-label">Length (CM)</label>
-                <input type="number" id="length" name="length" class="form-control">
+            <div class="row mb-3 align-items-center">
+                <label for="length" class="col-sm-2 col-form-label">Length (CM)</label>
+                <div class="col-sm-4">
+                    <input type="number" id="length" name="length" class="form-control">
+                </div>
             </div>
-            <small class="form-text text-muted">Please,provide dimensions in HxWxL format.</small>
+            <small class="form-text text-muted">Please, provide dimensions in HxWxL format.</small>
         </div>
 
         <!-- Book Attributes -->
         <div id="Book" class="product-attributes" style="display: none;">
-            <div class="mb-3">
-                <label for="weight" class="form-label">Weight (KG)</label>
-                <input type="number" id="weight" name="weight" class="form-control">
-                <small class="form-text text-muted">Please,provide weight in KG.</small>
+            <div class="row mb-3 align-items-center">
+                <label for="weight" class="col-sm-2 col-form-label">Weight (KG)</label>
+                <div class="col-sm-4">
+                    <input type="number" id="weight" name="weight" class="form-control">
+                    <small class="form-text text-muted">Please, provide weight in KG.</small>
+                </div>
             </div>
         </div>
     </form>
