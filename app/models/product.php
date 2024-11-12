@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\models;
 
 use App\core\model;
 use App\strategies\ProductAttribute\AttributeStrategyFactory;
 
-class Product extends model
+class product extends model
 {
     protected $tableName = 'products';
 
@@ -21,6 +21,19 @@ class Product extends model
             $product['attribute'] = AttributeStrategyFactory::format($product['type'],$product['attribute']);
         }
         return $products;
+    }
+
+    public function create(array $requestData)
+    {
+        $data = [
+            'sku' => $requestData['sku'],
+            'name' => $requestData['name'],
+            'price' => $requestData['price'],
+            'type' => $requestData['productType'],
+            'attribute' => AttributeStrategyFactory::set($requestData['productType'],$requestData),
+        ];
+
+        return $this->insert($data);
     }
 }
 

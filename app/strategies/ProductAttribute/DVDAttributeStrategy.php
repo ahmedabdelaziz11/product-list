@@ -11,6 +11,11 @@ class DVDAttributeStrategy implements AttributeInterface
 
     public function validate(array $attribute):bool
     {
-        return true;
+        return isset($attribute['size']) && is_numeric($attribute['size']);
+    }
+
+    public function set(array $attribute):string
+    {
+        return $attribute['size'];
     }
 }

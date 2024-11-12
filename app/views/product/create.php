@@ -75,38 +75,45 @@
 </div>
 
 <script>
-function toggleAttributes() {
-    document.querySelectorAll('.product-attributes').forEach(function (section) {
-        section.style.display = 'none';
-    });
+    function toggleAttributes() {
+        document.querySelectorAll('.product-attributes').forEach(function (section) {
+            section.style.display = 'none';
+        });
 
-    const selectedType = document.getElementById('productType').value;
+        const selectedType = document.getElementById('productType').value;
 
-    if (selectedType) {
-        document.getElementById(selectedType).style.display = 'block';
-    }
-}
-$('#save-button').on('click', function (e) {
-    e.preventDefault();
-
-    const formData = $('#product_form').serialize();
-
-    $.ajax({
-        url: '/products/store',
-        method: 'POST',
-        data: formData,
-        success: function (response) {
-            console.log(response);
-            // $('#responseMessage').removeClass('alert-danger').addClass('alert-success')
-            //     .text('Product added successfully!').show();
-        },
-        error: function () {
-            // $('#responseMessage').removeClass('alert-success').addClass('alert-danger')
-            //     .text('An error occurred while adding the product.').show();
+        if (selectedType) {
+            document.getElementById(selectedType).style.display = 'block';
         }
-    });
-});
+    }
+    $('#save-button').on('click', function (e) {
+        e.preventDefault();
 
+        const formData = $('#product_form').serialize();
+        $('.error-message').remove();
+        $.ajax({
+            url: '/products/store',
+            method: 'POST',
+            data: formData,
+            success: function (response) {
+                if (response.status === false && response.message) {
+                    $('.error-message').remove();
+
+                    $.each(response.message, function(field, message) {
+                        const inputField = $(`#${field}`);
+                        const errorMessage = `<small class="error-message text-danger">${message}</small>`;
+                        inputField.after(errorMessage); 
+                    });
+                } else if(response.status === true) 
+                {
+                    window.location.href = '/';
+                }
+            },
+            error: function () {
+                console.log('error');
+            }
+        });
+    });
 </script>
 
 <?php

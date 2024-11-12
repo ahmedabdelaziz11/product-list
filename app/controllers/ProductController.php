@@ -3,8 +3,8 @@
 namespace App\controllers;
 
 use App\core\controller;
-use App\Helpers\Response;
-use App\Models\Product;
+use App\helpers\Response;
+use App\models\product;
 use App\requests\DeleteProductRequest;
 use App\requests\StoreProductRequest;
 
@@ -22,9 +22,10 @@ class ProductController extends controller
 
     public function list()
     {
-        $productModel = new Product();
+        $productModel = new product();
         $products = $productModel->getAll();
         echo json_encode($products);
+        return;
     }
 
     public function store()
@@ -34,9 +35,17 @@ class ProductController extends controller
             Response::jsonResponse([
                 'status' => false,
                 'message' => $request->errors()
-            ], 400);
+            ], 200);
             return;
         }
+
+        $productModel = new product();
+        $productModel->create($_POST);
+        Response::jsonResponse([
+            'status' => true,
+            'message' => "product created successfully!"
+        ], 200);
+        return;
     }
 
     public function delete()
@@ -56,7 +65,6 @@ class ProductController extends controller
         {
             $productModel->delete('sku',$sku);
         }
-
         Response::jsonResponse([
             'status' => true,
             'message' => 'products deleted successfully'

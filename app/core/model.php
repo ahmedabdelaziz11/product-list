@@ -52,6 +52,21 @@ abstract class model
         return $this->where($column, '=', $value)->execute();
     }
 
+    public function exists(string $column, $value): bool
+    {
+        $this->query = "SELECT COUNT(*) FROM {$this->tableName} WHERE {$column} = :{$column}";
+        $this->params = [$column => $value];
+        
+        $stmt = $this->db->prepare($this->query);
+        $this->bindParams($stmt);
+        $stmt->execute();
+        
+        $count = $stmt->fetchColumn();
+        $this->resetQuery();
+    
+        return $count > 0;
+    }
+
     public function insert(array $data): bool
     {
         $columns = implode(', ', array_keys($data));

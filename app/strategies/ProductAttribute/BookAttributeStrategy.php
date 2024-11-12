@@ -11,6 +11,11 @@ class BookAttributeStrategy implements AttributeInterface
 
     public function validate(array $attribute):bool
     {
-        return true;
+        return isset($attribute['weight']) && is_numeric($attribute['weight']);
+    }
+
+    public function set(array $attribute):string
+    {
+        return $attribute['weight'];
     }
 }

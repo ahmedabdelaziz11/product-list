@@ -12,6 +12,16 @@ class FurnitureAttributeStrategy implements AttributeInterface
 
     public function validate(array $attribute):bool
     {
-        return true;
+        return isset($attribute['height']) 
+            && is_numeric($attribute['height']) 
+            && isset($attribute['width'])
+            && is_numeric($attribute['width']) 
+            && isset($attribute['length'])
+            && is_numeric($attribute['length']);
+    }
+
+    public function set(array $attribute):string
+    {
+        return $attribute['length'] . ',' . $attribute['width'] . ',' . $attribute['height'];
     }
 }
