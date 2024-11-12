@@ -4,7 +4,7 @@ namespace  App\strategies\ProductAttribute;
 
 class FurnitureAttributeStrategy implements AttributeInterface
 {
-    public function format(string $attribute):string
+    public function get(string $attribute):string
     {
         list($height, $width, $length) = explode(',', $attribute);
         return "Dimensions: {$height}x{$width}x{$length}";

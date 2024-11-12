@@ -4,7 +4,7 @@ namespace  App\strategies\ProductAttribute;
 
 class BookAttributeStrategy implements AttributeInterface
 {
-    public function format(string $attribute):string
+    public function get(string $attribute):string
     {
         return "Weight: {$attribute} KG";
     }

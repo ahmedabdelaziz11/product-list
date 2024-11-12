@@ -18,7 +18,7 @@ class product extends model
     {
         $products = $this->select()->get();
         foreach ($products as &$product) {
-            $product['attribute'] = AttributeStrategyFactory::format($product['type'],$product['attribute']);
+            $product['attribute'] = AttributeStrategyFactory::get($product['type'],$product['attribute']);
         }
         return $products;
     }
