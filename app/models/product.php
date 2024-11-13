@@ -3,6 +3,7 @@
 namespace App\models;
 
 use App\core\model;
+use App\factories\product\ProductFactory;
 use App\strategies\ProductAttribute\AttributeStrategyFactory;
 
 class product extends model
@@ -17,23 +18,31 @@ class product extends model
     public function getAll()
     {
         $products = $this->select()->get();
-        foreach ($products as &$product) {
-            $product['attribute'] = AttributeStrategyFactory::get($product['type'],$product['attribute']);
+        $data = [];
+        foreach ($products as $product) {
+            $data[] = ProductFactory::createProduct(
+                $product['type'],
+                $product['sku'],
+                $product['name'],
+                $product['price'],
+                $product['attribute'],
+            )->toArray();
         }
-        return $products;
+        
+        return $data;
     }
 
     public function create(array $requestData)
     {
-        $data = [
-            'sku' => $requestData['sku'],
-            'name' => $requestData['name'],
-            'price' => $requestData['price'],
-            'type' => $requestData['productType'],
-            'attribute' => AttributeStrategyFactory::set($requestData['productType'],$requestData),
-        ];
+        $product = ProductFactory::createProduct(
+            $requestData['productType'],
+            $requestData['sku'],
+            $requestData['name'],
+            $requestData['price'],
+            $requestData
+        )->toDatabaseArray();
 
-        return $this->insert($data);
+        return $this->insert($product);
     }
 }
 

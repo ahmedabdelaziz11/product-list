@@ -1,7 +1,7 @@
 <?php
 
-define('ROOT', dirname(__DIR__) . DIRECTORY_SEPARATOR);
-define('APP', ROOT . 'scandiweb/app' . DIRECTORY_SEPARATOR);
+define('ROOT', dirname(__FILE__) . DIRECTORY_SEPARATOR);
+define('APP', ROOT . '/app' . DIRECTORY_SEPARATOR);
 
 require_once APP . 'config/config.php';
 

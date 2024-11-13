@@ -6,7 +6,7 @@
         </h1>
         <div class="col-md-3 text-end">
             <button type="button" form="product_form" class="btn btn-outline-primary me-2" id="save-button">Save</button>
-            <a href="/" id="delete-product-btn" class="btn btn-primary">Cancel</a>
+            <a href="<?=BASE_URL?>" id="delete-product-btn" class="btn btn-primary">Cancel</a>
         </div>
     </header>
 
@@ -109,7 +109,7 @@
         const formData = $('#product_form').serialize();
         $('.error-message').remove();
         $.ajax({
-            url: '/products/store',
+            url: `<?= BASE_URL ?>products/store`,
             method: 'POST',
             data: formData,
             success: function (response) {

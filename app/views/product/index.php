@@ -7,7 +7,7 @@
         </h1>
 
         <div class="col-md-3 text-end">
-            <a href="/add-product" class="btn btn-outline-primary me-2">ADD</a>
+            <a href="<?= BASE_URL . 'add-product' ?>" class="btn btn-outline-primary me-2">ADD</a>
             <button type="button" id="delete-product-btn" class="btn btn-primary">MASS DELETE</button>
         </div>
     </header>
@@ -21,7 +21,7 @@
 $(document).ready(() => {
     function getProducts() {
         $(".products").html("");
-        fetch("/products")
+        fetch("products")
             .then((response) => response.json())
             .then((data) => {
                 data.forEach((product) => {
@@ -58,7 +58,7 @@ $(document).ready(() => {
 
         if (selectedProducts.length > 0) {
             $.ajax({
-                url: "/products/delete",
+                url: `<?= BASE_URL ?>products/delete`,
                 method: "POST",
                 data: {
                     products: selectedProducts,

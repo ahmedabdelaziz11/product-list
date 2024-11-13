@@ -3,8 +3,8 @@
 namespace App\requests;
 
 use App\constants\ProductType;
+use App\factories\product\ProductFactory;
 use App\models\product;
-use App\strategies\ProductAttribute\AttributeStrategyFactory;
 
 class StoreProductRequest {
     private array $data;
@@ -14,7 +14,8 @@ class StoreProductRequest {
         $this->data = $_POST;
     }
     
-    public function validate(): bool {
+    public function validate(): bool
+    {
         if (empty($this->data['sku'])) {
             $this->errors['sku'] = 'Product SKU is required.';
         }elseif((new product())->exists('sku',$this->data['sku'])){
@@ -41,10 +42,11 @@ class StoreProductRequest {
         return empty($this->errors);
     }
 
-    private function validateAttributesByType(): void {
+    private function validateAttributesByType(): void
+    {
+        $productType = $this->data['productType'];
         try {
-            $strategy = AttributeStrategyFactory::validate($this->data['productType'],$this->data);
-            if (!$strategy) {
+            if (!ProductFactory::validateAttributes($productType, $this->data)) {
                 $this->errors['attribute'] = 'Invalid attributes for type: ' . $this->data['productType'];
             }
         } catch (\Exception $e) {
@@ -52,7 +54,8 @@ class StoreProductRequest {
         }
     }
 
-    public function errors(): array {
+    public function errors(): array 
+    {
         return $this->errors;
     }
 }
